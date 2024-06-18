@@ -23,28 +23,10 @@ struct OutputVideo : Encodable {
 }
 
 extension OutputVideo {
-
-    // apiの日時をパースする用のフォーマッター
-    static let inputDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        return formatter
-    }()
-
-    // 日本時間で出力する用のフォーマッター
-    static let outputDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = .init(identifier: "Asia/Tokyo")
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        return formatter
-    }()
-
     // utc時間を日本時間に変換する
     static func toJapanTime(_ datetime: String) -> String {
-        let date = inputDateFormatter.date(from: datetime)!
-        return outputDateFormatter.string(from: date)
+        let date = DateFormatter.inputDateFormatter.date(from: datetime)!
+        return DateFormatter.outputDateFormatter.string(from: date)
     }
 
     init(from: VideosResponse.Item) {

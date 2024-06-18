@@ -47,7 +47,14 @@ struct ArchiveCommand: AsyncParsableCommand {
 
         print("writing channels(\(channels.count)) to \(channelUrl.absoluteString)")
 
-        let data = try encoder.encode(channels)
-        try data.write(to: channelUrl)
+        try encoder.encode(channels).write(to: channelUrl)
+
+        // ログ書き出し
+        let meta = OutputMeta(publishedAt: DateFormatter.outputDateFormatter.string(from: Date()))
+        let metaUrl = destinationBaseUrl.appending(path: "meta").appendingPathExtension("json")
+        
+        print("writing meta to \(metaUrl.absoluteString)")
+
+        try encoder.encode(meta).write(to: metaUrl)
     }
 }
