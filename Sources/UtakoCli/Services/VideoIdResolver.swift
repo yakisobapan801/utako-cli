@@ -26,7 +26,7 @@ class VideoIdResolver {
         case .external:
             // ネタ元 https://youtube.com/playlist?list=PLzYQzp1X7nSgQs0aMQlbHRjh_B6SxjWFx
             let loader = ListPlaylistItems()
-            let items = try await loader.load(palylistId: "PLzYQzp1X7nSgQs0aMQlbHRjh_B6SxjWFx", credentials: credentials)
+            let items = try await loader.load(palylistId: "PLvqccTT5o2dW-dkkHIsLTZA6SnLxYRFMw", credentials: credentials)
             return items.map { $0.contentDetails.videoId }
         }
     }
